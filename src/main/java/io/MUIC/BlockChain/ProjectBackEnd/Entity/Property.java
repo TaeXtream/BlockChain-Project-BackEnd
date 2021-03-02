@@ -1,24 +1,43 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Entity;
 
 import lombok.*;
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import java.util.Arrays;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     private String name;
 
-    private transient Address address;
+    private String addressNumber;
 
-    private transient Detail detail;
+    private String district;
+
+    private String province;
+
+    private String country;
+
+    private boolean status;
+
+    private String buildingType;
+
+    private String salePrice;
+
+    private String rentPrice;
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Property[Name='%s', Address='%s']",
+                name, Arrays.toString(new String[]{addressNumber, district, province, country}));
+    }
 
 
 }
+
