@@ -2,7 +2,6 @@ package io.MUIC.BlockChain.ProjectBackEnd;
 
 import io.MUIC.BlockChain.ProjectBackEnd.Entity.Property;
 import io.MUIC.BlockChain.ProjectBackEnd.Repository.PropertyRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -40,4 +39,4 @@ public class ProjectBackEndApplication implements CommandLineRunner {
 
 	}
 
-	}
+}
