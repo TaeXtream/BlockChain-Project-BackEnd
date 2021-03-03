@@ -7,17 +7,29 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @RequiredArgsConstructor
-public abstract class User {
+public abstract class AppUser {
 
     @Id
     private String id;
 
+    @NonNull
     private String username;
 
     @JsonIgnore
+    @NonNull
     private String password;
+
+    @NonNull
+    private String firstname;
+
+    @NonNull
+    private String lastname;
+
+    @NonNull
+    private String title;
+
+    private final String role = "User";
 
 
 }

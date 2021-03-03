@@ -1,8 +1,7 @@
 package io.MUIC.BlockChain.ProjectBackEnd;
 
-import io.MUIC.BlockChain.ProjectBackEnd.Entity.Property;
-import io.MUIC.BlockChain.ProjectBackEnd.Repository.PropertyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.MUIC.BlockChain.ProjectBackEnd.User.Admin;
+import io.MUIC.BlockChain.ProjectBackEnd.User.AppUser;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProjectBackEndApplication implements CommandLineRunner {
 
-	@Autowired
-	private PropertyRepository propertyRepository;
+//	@Autowired
+//	private PropertyRepository propertyRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectBackEndApplication.class, args);
@@ -20,7 +19,7 @@ public class ProjectBackEndApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 
-		propertyRepository.deleteAll();
+		/*propertyRepository.deleteAll();
 		Property property1 = new Property();
 		property1.setName("Extra Condo");
 		property1.setAddressNumber("250");
@@ -34,7 +33,10 @@ public class ProjectBackEndApplication implements CommandLineRunner {
 
 		propertyRepository.save(property1);
 
-		System.out.println(propertyRepository.findByName("Extra Condo").toString());
+		System.out.println(propertyRepository.findByName("Extra Condo").toString());*/
+
+		AppUser admin = new Admin("admin", "3443", "Jame", "K", "Mr.");
+		System.out.println(admin.getRole());
 
 	}
 
