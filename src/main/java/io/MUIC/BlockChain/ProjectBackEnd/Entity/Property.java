@@ -2,12 +2,14 @@ package io.MUIC.BlockChain.ProjectBackEnd.Entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+
 import java.util.Arrays;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Property {
 
     @Id

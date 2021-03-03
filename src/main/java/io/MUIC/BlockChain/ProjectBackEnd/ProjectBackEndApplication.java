@@ -36,7 +36,6 @@ public class ProjectBackEndApplication implements CommandLineRunner {
 
 		System.out.println(propertyRepository.findByName("Extra Condo").toString());
 
-
 	}
 
 }
