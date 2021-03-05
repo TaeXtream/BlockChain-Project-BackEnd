@@ -19,10 +19,14 @@ public class PropertyAgent extends AppUser {
 
     private final String role = "Agent";
 
-    public PropertyAgent(String username, String password, String firstname, String lastname, String title, String companyName) {
-        super(username, password, firstname, lastname, title);
+    public PropertyAgent(String username, String password, String firstname, String lastname, String companyName) {
+        super(username, password, firstname, lastname);
         this.companyName = companyName;
         propertyList = new ArrayList<>();
 
+    }
+
+    public void addProperty(Property property) {
+        propertyList.add(property);
     }
 }

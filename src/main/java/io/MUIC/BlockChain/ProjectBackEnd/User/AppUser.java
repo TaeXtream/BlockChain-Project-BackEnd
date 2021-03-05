@@ -26,9 +26,6 @@ public abstract class AppUser {
     @NonNull
     private String lastname;
 
-    @NonNull
-    private String title;
-
     private final String role = "User";
 
 

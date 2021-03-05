@@ -1,5 +1,6 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Entity;
 
+import io.MUIC.BlockChain.ProjectBackEnd.User.PropertyAgent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,8 @@ public class Property {
     private String salePrice;
 
     private String rentPrice;
+
+    private PropertyAgent propertyAgent;
 
     @Override
     public String toString() {
