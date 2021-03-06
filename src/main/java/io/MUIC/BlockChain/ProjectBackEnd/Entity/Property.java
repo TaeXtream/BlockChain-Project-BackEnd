@@ -1,7 +1,12 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Entity;
 
-import lombok.*;
+import io.MUIC.BlockChain.ProjectBackEnd.User.PropertyAgent;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
+
 import java.util.Arrays;
 
 @Getter
@@ -30,6 +35,8 @@ public class Property {
     private String salePrice;
 
     private String rentPrice;
+
+    private PropertyAgent propertyAgent;
 
     @Override
     public String toString() {
