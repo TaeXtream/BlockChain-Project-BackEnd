@@ -20,4 +20,9 @@ public interface PropertyRepository extends MongoRepository<Property, String> {
 
     List<Property> findPropertiesByPropertyAgent(PropertyAgent propertyAgent);
 
+    List<Property> findPropertiesByRentPrice(String rentPrice);
+
+    List<Property> findPropertiesBySalePrice(String salePrice);
+
+
 }

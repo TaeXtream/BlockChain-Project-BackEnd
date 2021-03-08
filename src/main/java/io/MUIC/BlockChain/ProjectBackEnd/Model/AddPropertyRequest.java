@@ -28,4 +28,6 @@ public class AddPropertyRequest {
     private String salePrice;
 
     private String rentPrice;
+
+    private String sellPeriod;
 }
