@@ -2,6 +2,7 @@ package io.MUIC.BlockChain.ProjectBackEnd.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hyperledger.fabric.gateway.Identity;
 import org.springframework.data.annotation.Id;
 
 @Getter
@@ -28,5 +29,6 @@ public abstract class AppUser {
 
     private final String role = "User";
 
+    private Identity identity;
 
 }

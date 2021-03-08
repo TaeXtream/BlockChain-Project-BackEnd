@@ -38,6 +38,8 @@ public class Property {
 
     private PropertyAgent propertyAgent;
 
+    private String sellPeriod;
+
     @Override
     public String toString() {
         return String.format(
