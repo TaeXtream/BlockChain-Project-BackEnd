@@ -7,11 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Admin extends AppUser {
+public class Customer extends AppUser {
 
-    private final String role = "Admin";
+    private final String role = "User";
 
-    public Admin(String username, String password, String firstname, String lastname) {
+    public Customer(String username, String password, String firstname, String lastname) {
         super(username, password, firstname, lastname);
     }
+
 }

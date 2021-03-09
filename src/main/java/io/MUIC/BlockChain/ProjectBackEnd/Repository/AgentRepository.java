@@ -10,4 +10,5 @@ public interface AgentRepository extends UserRepository<PropertyAgent> {
 
     List<PropertyAgent> findAllByCompanyName(String companyName);
 
+
 }
