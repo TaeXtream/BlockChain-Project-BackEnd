@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class AddCustomerRequest {
+public class AddAgentRequest {
 
     private String username;
 
@@ -19,4 +19,5 @@ public class AddCustomerRequest {
 
     private String lastname;
 
+    private String companyName;
 }
