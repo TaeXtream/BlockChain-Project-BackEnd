@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RemoveCustomerRequest {
+public class RemoveAppUserRequest {
     private String username;
 }
