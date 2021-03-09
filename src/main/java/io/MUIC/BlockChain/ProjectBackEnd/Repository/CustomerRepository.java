@@ -1,6 +1,7 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Repository;
 
-import io.MUIC.BlockChain.ProjectBackEnd.User.AppUser;
+import io.MUIC.BlockChain.ProjectBackEnd.User.Customer;
 
-public interface CustomerRepository extends UserRepository<AppUser> {
+public interface CustomerRepository extends UserRepository<Customer> {
+
 }

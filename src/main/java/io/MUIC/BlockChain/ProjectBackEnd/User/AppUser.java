@@ -27,8 +27,6 @@ public abstract class AppUser {
     @NonNull
     private String lastname;
 
-    private final String role = "User";
-
     private Identity identity;
 
 }

@@ -13,4 +13,6 @@ public interface UserRepository<T extends AppUser> extends MongoRepository<T, St
 
     List<T> findAllByRole(String role);
 
+    boolean existsByUsername(String username);
+
 }

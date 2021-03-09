@@ -28,7 +28,7 @@ public class Property {
 
     private String country;
 
-    private boolean status;
+    private boolean activeStatus;
 
     private String buildingType;
 

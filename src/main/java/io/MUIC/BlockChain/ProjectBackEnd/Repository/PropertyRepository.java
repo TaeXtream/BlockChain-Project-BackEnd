@@ -24,5 +24,6 @@ public interface PropertyRepository extends MongoRepository<Property, String> {
 
     List<Property> findPropertiesBySalePrice(String salePrice);
 
+    boolean existsByName(String name);
 
 }
