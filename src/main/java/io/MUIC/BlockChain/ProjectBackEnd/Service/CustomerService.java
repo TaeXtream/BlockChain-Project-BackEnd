@@ -1,5 +1,7 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Service;
 
+import io.MUIC.BlockChain.ProjectBackEnd.Model.AddCustomerOrAdminRequest;
+import io.MUIC.BlockChain.ProjectBackEnd.Model.ValidateResponse;
 import io.MUIC.BlockChain.ProjectBackEnd.Repository.CustomerRepository;
 import io.MUIC.BlockChain.ProjectBackEnd.User.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +28,16 @@ public class CustomerService {
         return customerRepository.findByUsername(username);
     }
 
-    public Customer addCustomer(String username, String password, String firstname, String lastname) {
-        Customer customer = new Customer();
-
-        customer.setUsername(username);
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        customer.setPassword(hashedPassword);
-        customer.setFirstname(firstname);
-        customer.setLastname(lastname);
-        customerRepository.save(customer);
-
-        return getCustomer(username);
+    public ValidateResponse addCustomer(AddCustomerOrAdminRequest addCustomerOrAdminRequest) {
+        if (!customerRepository.existsByUsername(addCustomerOrAdminRequest.getUsername())) {
+            Customer customer = new Customer();
+            customer.setUsername(addCustomerOrAdminRequest.getUsername());
+            String hashedPassword = BCrypt.hashpw(addCustomerOrAdminRequest.getPassword(), BCrypt.gensalt());
+            customer.setPassword(hashedPassword);
+            // Add Blockchain Identity Function also
+            customerRepository.save(customer);
+            return new ValidateResponse("Success");
+        }
+        return new ValidateResponse("Fail");
     }
 }
