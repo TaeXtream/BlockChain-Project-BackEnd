@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface PropertyRepository extends MongoRepository<Property, String> {
 
+    Property getById(String id);
+
     Property findByName(String name);
 
     List<Property> findPropertiesByDistrict(String district);
