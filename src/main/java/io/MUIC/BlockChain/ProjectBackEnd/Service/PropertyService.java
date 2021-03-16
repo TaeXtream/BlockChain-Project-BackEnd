@@ -19,4 +19,8 @@ public class PropertyService {
         this.propertyRepository.findAll().forEach(properties::add);
         return properties;
     }
+
+    public Property findPropertyById(String id) {
+        return this.propertyRepository.findById(id).get();
+    }
 }
