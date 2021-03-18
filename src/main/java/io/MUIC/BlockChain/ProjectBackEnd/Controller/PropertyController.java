@@ -1,5 +1,6 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,45 @@ public class PropertyController {
             List<Property> properties = this.propertyService.findAllProperties();
 
             if (properties.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(properties, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/properties/by/{searchBy}/{searchValue}")
+    public ResponseEntity<List<Property>> getPropertiesBySearchValue(
+        @PathVariable("searchBy") String searchBy,
+        @PathVariable("searchValue") String searchValue
+    ) {
+        try {
+            List<Property> properties = new ArrayList<>();
+            System.out.println(searchValue);
+            
+            switch (searchBy) {
+                case "Name":
+                    properties = this.propertyService.findPropertiesByName(searchValue);
+                    break;
+                case "District":
+                    properties = this.propertyService.findPropertiesByDistrict(searchValue);
+                    break;
+                case "Province":
+                    properties = this.propertyService.findPropertiesByProvince(searchValue);
+                    break;
+                case "Country":
+                    properties = this.propertyService.findPropertiesByCountry(searchValue);
+                    break;
+                case "Building Type":
+                    properties = this.propertyService.findPropertiesByBuildingType(searchValue);
+                    break;
+                default:
+                    break;
+            }
+
+            if (properties.isEmpty() || properties == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 

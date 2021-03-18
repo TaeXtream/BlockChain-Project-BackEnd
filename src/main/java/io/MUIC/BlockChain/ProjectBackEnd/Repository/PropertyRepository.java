@@ -12,6 +12,10 @@ public interface PropertyRepository extends MongoRepository<Property, String> {
 
     Property findByName(String name);
 
+    List<Property> findPropertiesByName(String name);
+
+    List<Property> findPropertiesByBuildingType(String buildingType);
+
     List<Property> findPropertiesByDistrict(String district);
 
     List<Property> findPropertiesByProvince(String province);
