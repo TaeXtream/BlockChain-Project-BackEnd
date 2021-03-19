@@ -32,3 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 /fabric-samples/
+/propertyListingCC/javaApp/
+/propertyListingCC/javaApp/src/
+/propertyListingCC/javaApp/src/main/java/
+/.SampleApp.java
