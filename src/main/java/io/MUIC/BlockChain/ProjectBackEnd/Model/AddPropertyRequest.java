@@ -31,5 +31,11 @@ public class AddPropertyRequest {
 
     private String sellPeriod;
 
-    private String agentUsername;
+    private String agentName;
+
+    private String signature;
+
+    private String documentPath;
+
+    private String imagePath;
 }

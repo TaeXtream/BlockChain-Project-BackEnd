@@ -52,6 +52,7 @@ public class AgentService {
             property.setPropertyAgent(agent);
             agent.addProperty(property);
             property.setSellPeriod(addPropertyRequest.getSellPeriod());
+            // Add property to fabric
             propertyRepository.save(property);
             return new ValidateResponse("Success");
         }
@@ -63,6 +64,7 @@ public class AgentService {
         PropertyAgent targetAgent = target.getPropertyAgent();
         targetAgent.getPropertyList().remove(target);
         propertyRepository.delete(target);
+        // Delete from fabric
         if (!propertyRepository.existsByName(removePropertyRequest.getName()) && !targetAgent.getPropertyList().contains(target)) {
             return new ValidateResponse("Success");
         }

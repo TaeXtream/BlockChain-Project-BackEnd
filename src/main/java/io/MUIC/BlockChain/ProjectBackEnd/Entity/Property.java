@@ -1,5 +1,6 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.MUIC.BlockChain.ProjectBackEnd.User.PropertyAgent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,6 +40,9 @@ public class Property {
     private PropertyAgent propertyAgent;
 
     private String sellPeriod;
+
+    @JsonIgnore
+    private String signature;
 
     @Override
     public String toString() {
