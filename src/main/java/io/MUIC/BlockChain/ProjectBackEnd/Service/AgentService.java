@@ -48,7 +48,7 @@ public class AgentService {
             property.setBuildingType(addPropertyRequest.getBuildingType());
             property.setRentPrice(addPropertyRequest.getRentPrice());
             property.setSalePrice(addPropertyRequest.getSalePrice());
-            PropertyAgent agent = agentRepository.findByUsername(addPropertyRequest.getAgentUsername());
+            PropertyAgent agent = agentRepository.findByUsername(addPropertyRequest.getAgentName());
             property.setPropertyAgent(agent);
             agent.addProperty(property);
             property.setSellPeriod(addPropertyRequest.getSellPeriod());
