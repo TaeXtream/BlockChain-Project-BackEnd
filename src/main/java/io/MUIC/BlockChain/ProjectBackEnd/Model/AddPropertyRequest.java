@@ -32,4 +32,6 @@ public class AddPropertyRequest {
     private String sellPeriod;
 
     private String agentUsername;
+
+    private String signature;
 }
