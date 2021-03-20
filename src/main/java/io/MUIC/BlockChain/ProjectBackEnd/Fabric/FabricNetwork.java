@@ -21,26 +21,24 @@ public class FabricNetwork {
     Path walletPath;
     Wallet wallet;
     Path networkConfigPath;
-    Network network;
-    Contract contract;
+    String username;
 
-    public FabricNetwork() throws IOException {
+    public FabricNetwork(String username, String password) throws IOException {
+        this.username = username;
+        EnrollAdmin(this.username, password);
         this.walletPath = Paths.get("wallet");
         this.wallet = Wallets.newFileSystemWallet(walletPath);
         this.networkConfigPath = Paths.get("fabric-samples", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
 
-        Gateway.Builder builder = Gateway.createBuilder();
-        builder.identity(wallet, "admin").networkConfig(networkConfigPath).discovery(true);
-        try (Gateway gateway = builder.connect()) {
-            this.network = gateway.getNetwork("mychannel");
-            this.contract = network.getContract("fabproperty");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void addProperty(String id, AddPropertyRequest addPropertyRequest) {
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             contract.submitTransaction("createProperty", id,
                     addPropertyRequest.getName(), addPropertyRequest.getSignature(),
                     addPropertyRequest.getAgentName(), addPropertyRequest.getDocumentPath(), addPropertyRequest.getImagePath());
@@ -52,6 +50,11 @@ public class FabricNetwork {
     public String getPropertyDetail(String id) {
         byte[] result = {};
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             result = contract.evaluateTransaction("readProperty", id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,6 +65,11 @@ public class FabricNetwork {
     public String getPropertyOwner(String id) {
         byte[] result = {};
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             result = contract.evaluateTransaction("getPropertyOwner", id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,6 +80,11 @@ public class FabricNetwork {
     public String getPropertyDocumentPath(String id) {
         byte[] result = {};
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             result = contract.evaluateTransaction("getPropertyDocumentPath", id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,6 +95,11 @@ public class FabricNetwork {
     public String getPropertyDocumentImagePath(String id) {
         byte[] result = {};
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             result = contract.evaluateTransaction("getPropertyImagePath", id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,6 +110,11 @@ public class FabricNetwork {
     public String getPropertySignature(String id) {
         byte[] result = {};
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             result = contract.evaluateTransaction("getPropertySignature", id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,6 +125,11 @@ public class FabricNetwork {
     public String getPropertyHistory(String id) {
         byte[] result = {};
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             result = contract.evaluateTransaction("getPropertyHistory", id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,6 +139,11 @@ public class FabricNetwork {
 
     public void transferPropertyOwner(String id, String newOwner) {
         try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
             contract.submitTransaction("transferProperty", id, newOwner);
         } catch (Exception e) {
             e.printStackTrace();
