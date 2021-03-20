@@ -1,6 +1,7 @@
 package io.MUIC.BlockChain.ProjectBackEnd.Service;
 
 import io.MUIC.BlockChain.ProjectBackEnd.Entity.Property;
+import io.MUIC.BlockChain.ProjectBackEnd.Fabric.FabricNetwork;
 import io.MUIC.BlockChain.ProjectBackEnd.Model.*;
 import io.MUIC.BlockChain.ProjectBackEnd.Repository.AdminRepository;
 import io.MUIC.BlockChain.ProjectBackEnd.Repository.AgentRepository;
@@ -30,6 +31,9 @@ public class AdminService {
 
     @Autowired
     PropertyRepository propertyRepository;
+
+    @Autowired
+    FabricNetwork fabricNetwork;
 
     public List<Customer> getAllCustomer() {
         return customerRepository.findAll();
@@ -66,7 +70,7 @@ public class AdminService {
             admin.setUsername(addCustomerOrAdminRequest.getUsername());
             String hashedPassword = BCrypt.hashpw(addCustomerOrAdminRequest.getPassword(), BCrypt.gensalt());
             admin.setPassword(hashedPassword);
-            // Add Blockchain Identity Function also
+            fabricNetwork.registerUser(addCustomerOrAdminRequest.getUsername());
             adminRepository.save(admin);
             return new ValidateResponse("Success");
         }
@@ -91,6 +95,7 @@ public class AdminService {
     public ValidateResponse addNewProperty(AddPropertyRequest addPropertyRequest) {
         if (!propertyRepository.existsByName(addPropertyRequest.getName())) {
             Property property = new Property();
+            property.setId("p" + propertyRepository.count());
             property.setName(addPropertyRequest.getName());
             property.setAddressNumber(addPropertyRequest.getAddressNumber());
             property.setDistrict(addPropertyRequest.getDistrict());
@@ -104,6 +109,7 @@ public class AdminService {
             property.setPropertyAgent(agent);
             agent.addProperty(property);
             property.setSellPeriod(addPropertyRequest.getSellPeriod());
+            fabricNetwork.addProperty(property.getId(), addPropertyRequest);
             propertyRepository.save(property);
             return new ValidateResponse("Success");
         }
@@ -140,6 +146,7 @@ public class AdminService {
     public ValidateResponse removeProperty(RemovePropertyRequest removePropertyRequest) {
         Property target = propertyRepository.findByName(removePropertyRequest.getName());
         PropertyAgent targetAgent = target.getPropertyAgent();
+        fabricNetwork.deleteProperty(target.getId());
         targetAgent.getPropertyList().remove(target);
         propertyRepository.delete(target);
         if (!propertyRepository.existsByName(removePropertyRequest.getName()) && !targetAgent.getPropertyList().contains(target)) {
