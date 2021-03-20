@@ -96,6 +96,19 @@ public class FabricNetwork {
         }
     }
 
+    public void deleteProperty(String id) {
+        try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
+            contract.submitTransaction("deleteProperty", id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getPropertyDetail(String id) {
         byte[] result = {};
         try {

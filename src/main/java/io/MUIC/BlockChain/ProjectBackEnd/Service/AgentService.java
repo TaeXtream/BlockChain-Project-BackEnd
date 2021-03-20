@@ -39,6 +39,7 @@ public class AgentService {
     public ValidateResponse addNewProperty(AddPropertyRequest addPropertyRequest) {
         if (!propertyRepository.existsByName(addPropertyRequest.getName())) {
             Property property = new Property();
+            property.setId("p" + propertyRepository.count());
             property.setName(addPropertyRequest.getName());
             property.setAddressNumber(addPropertyRequest.getAddressNumber());
             property.setDistrict(addPropertyRequest.getDistrict());
