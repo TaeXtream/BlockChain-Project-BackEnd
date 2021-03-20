@@ -10,7 +10,6 @@ import org.hyperledger.fabric.sdk.security.CryptoSuiteFactory;
 import org.hyperledger.fabric_ca.sdk.EnrollmentRequest;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -23,12 +22,16 @@ public class FabricNetwork {
     Path networkConfigPath;
     String username;
 
-    public FabricNetwork(String username, String password) throws IOException {
-        this.username = username;
-        EnrollAdmin(this.username, password);
-        this.walletPath = Paths.get("wallet");
-        this.wallet = Wallets.newFileSystemWallet(walletPath);
-        this.networkConfigPath = Paths.get("fabric-samples", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
+    public FabricNetwork(String username, String password) {
+        try {
+            this.username = username;
+            EnrollAdmin(this.username, password);
+            this.walletPath = Paths.get("wallet");
+            this.wallet = Wallets.newFileSystemWallet(walletPath);
+            this.networkConfigPath = Paths.get("fabric-samples", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -41,7 +44,8 @@ public class FabricNetwork {
             Contract contract = network.getContract("fabproperty");
             contract.submitTransaction("createProperty", id,
                     addPropertyRequest.getName(), addPropertyRequest.getSignature(),
-                    addPropertyRequest.getAgentName(), addPropertyRequest.getDocumentPath(), addPropertyRequest.getImagePath());
+                    addPropertyRequest.getAgentName(), addPropertyRequest.getDocumentPath(),
+                    addPropertyRequest.getImagePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,6 +152,21 @@ public class FabricNetwork {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getAllPropertiesDetail() {
+        byte[] result = {};
+        try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
+            result = contract.evaluateTransaction("getAllProperties");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new String(result);
     }
 
     public static void EnrollAdmin(String username, String password) {
