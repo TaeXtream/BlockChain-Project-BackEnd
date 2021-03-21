@@ -1,11 +1,7 @@
 package io.MUIC.BlockChain.ProjectBackEnd;
 
-import io.MUIC.BlockChain.ProjectBackEnd.Entity.Property;
-import io.MUIC.BlockChain.ProjectBackEnd.User.Admin;
-import io.MUIC.BlockChain.ProjectBackEnd.User.PropertyAgent;
-// import io.MUIC.BlockChain.ProjectBackEnd.Repository.PropertyRepository;
-
-// import org.springframework.beans.factory.annotation.Autowired;
+import io.MUIC.BlockChain.ProjectBackEnd.Fabric.FabricNetwork;
+import io.MUIC.BlockChain.ProjectBackEnd.Model.AddPropertyRequest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,8 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProjectBackEndApplication implements CommandLineRunner {
 
-	// @Autowired
-	// private PropertyRepository propertyRepository;
+	//@Autowired
+	//private PropertyRepository propertyRepository;
+
+	static {
+		System.setProperty("org.hyperledger.fabric.sdk.service_discovery.as_localhost", "true");
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectBackEndApplication.class, args);
@@ -23,30 +23,23 @@ public class ProjectBackEndApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 
-        //propertyRepository.deleteAll();
-        Property property1 = new Property();
-        property1.setName("Extra Condo");
-        property1.setAddressNumber("250");
-        property1.setDistrict("Rang Sit");
-        property1.setProvince("Bangkok");
-        property1.setCountry("Thailand");
-        property1.setActiveStatus(true);
-        property1.setBuildingType("Condo");
-        property1.setSalePrice("5000000");
-        property1.setRentPrice("10000");
+		FabricNetwork fabricNetwork1 = new FabricNetwork();
+		AddPropertyRequest addPropertyRequest = new AddPropertyRequest();
+		addPropertyRequest.setImagePath("asset/image/p1.jpg");
+		addPropertyRequest.setDocumentPath("asset/doc/ti1.pdf");
+		addPropertyRequest.setSignature("uosdbiu");
+		addPropertyRequest.setAgentName("Johnson");
+		addPropertyRequest.setName("O House");
 
-        // propertyRepository.save(property1);
+		fabricNetwork1.addProperty("p1", addPropertyRequest);
 
-        //System.out.println(propertyRepository.findByName("Extra Condo").toString());
+		System.out.println(fabricNetwork1.getPropertyDetail("p1"));
 
-        Admin admin = new Admin("admin", "3443", "Jame", "K");
-        System.out.println(admin.getRole());
+		fabricNetwork1.transferPropertyOwner("p1", "Paul");
 
-        PropertyAgent agent = new PropertyAgent("agent", "3443", "Jack", "B", "Condo Corp.");
+		System.out.println(fabricNetwork1.getPropertyHistory("p1"));
 
-        agent.addProperty(property1);
 
-        System.out.println(agent.getPropertyList().toString());
-    }
+	}
 
 }
