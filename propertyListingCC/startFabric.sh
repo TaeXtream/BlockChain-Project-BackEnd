@@ -29,7 +29,7 @@ popd
 
 cat <<EOF
 
-Succesfully Start Fabric and Depoly Chancode.
+Succesfully Start Fabric and Depoly Chaincode.
 
 Total setup execution time : $(($(date +%s) - starttime)) secs ...
 
