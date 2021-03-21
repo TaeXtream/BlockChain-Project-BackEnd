@@ -105,9 +105,6 @@ public class AdminService {
             property.setBuildingType(addPropertyRequest.getBuildingType());
             property.setRentPrice(addPropertyRequest.getRentPrice());
             property.setSalePrice(addPropertyRequest.getSalePrice());
-            PropertyAgent agent = agentRepository.findByUsername(addPropertyRequest.getAgentName());
-            property.setPropertyAgent(agent);
-            agent.addProperty(property);
             property.setSellPeriod(addPropertyRequest.getSellPeriod());
             fabricNetwork.addProperty(property.getId(), addPropertyRequest);
             propertyRepository.save(property);
@@ -145,11 +142,9 @@ public class AdminService {
 
     public ValidateResponse removeProperty(RemovePropertyRequest removePropertyRequest) {
         Property target = propertyRepository.findByName(removePropertyRequest.getName());
-        PropertyAgent targetAgent = target.getPropertyAgent();
         fabricNetwork.deleteProperty(target.getId());
-        targetAgent.getPropertyList().remove(target);
         propertyRepository.delete(target);
-        if (!propertyRepository.existsByName(removePropertyRequest.getName()) && !targetAgent.getPropertyList().contains(target)) {
+        if (!propertyRepository.existsByName(removePropertyRequest.getName())) {
             return new ValidateResponse("Success");
         }
         return new ValidateResponse("Fail");
