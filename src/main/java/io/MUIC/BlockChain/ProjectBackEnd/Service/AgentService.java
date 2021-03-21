@@ -50,7 +50,7 @@ public class AgentService {
             property.setRentPrice(addPropertyRequest.getRentPrice());
             property.setSalePrice(addPropertyRequest.getSalePrice());
             PropertyAgent agent = agentRepository.findByUsername(addPropertyRequest.getAgentName());
-            property.setPropertyAgent(agent);
+            //property.setPropertyAgent(agent);
             agent.addProperty(property);
             property.setSellPeriod(addPropertyRequest.getSellPeriod());
             // Add property to fabric
@@ -62,11 +62,11 @@ public class AgentService {
 
     public ValidateResponse removeProperty(RemovePropertyRequest removePropertyRequest) {
         Property target = propertyRepository.findByName(removePropertyRequest.getName());
-        PropertyAgent targetAgent = target.getPropertyAgent();
-        targetAgent.getPropertyList().remove(target);
+        //PropertyAgent targetAgent = target.getPropertyAgent();
+        //targetAgent.getPropertyList().remove(target);
         propertyRepository.delete(target);
         // Delete from fabric
-        if (!propertyRepository.existsByName(removePropertyRequest.getName()) && !targetAgent.getPropertyList().contains(target)) {
+        if (!propertyRepository.existsByName(removePropertyRequest.getName())) {// && !targetAgent.getPropertyList().contains(target)) {
             return new ValidateResponse("Success");
         }
         return new ValidateResponse("Fail");

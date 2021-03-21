@@ -124,6 +124,21 @@ public class FabricNetwork {
         return new String(result);
     }
 
+    public String propertyExists(String id) {
+        byte[] result = {};
+        try {
+            Gateway.Builder builder = Gateway.createBuilder();
+            builder.identity(wallet, username).networkConfig(networkConfigPath).discovery(true);
+            Gateway gateway = builder.connect();
+            Network network = gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("fabproperty");
+            result = contract.evaluateTransaction("propertyExists", id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new String(result);
+    }
+
     public String getPropertyOwner(String id) {
         byte[] result = {};
         try {
