@@ -6,17 +6,61 @@ class FabProperty extends Contract {
 
     async InitLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
-        // const properties = [
-        //     {ID:'p1', name:'J House', signature:'adsd', owner:'James', documentPath:'asset/doc/ti1.pdf', imagePath:'asset/image/p1.jpg'},
-        //     {ID:'p2', name:'12Condo', signature:'4xes', owner:'Tomson', documentPath:'asset/doc/ti2.pdf', imagePath:'asset/image/p2.jpg'},
-        //     {ID:'p3', name:'U Mansion', signature:'man123', owner:'Jack', documentPath:'asset/doc/ti2.pdf', imagePath:'asset/image/p3.jpg'},
-        //     {ID:'p4', name:'Oha Island', signature:'is1s23', owner:'Tony', documentPath:'asset/doc/ti2.pdf', imagePath:'asset/image/p4.jpg'}
+        const properties = [
+            {
+                ID: 'p1',
+                name: 'J House',
+                signature: 'adsd',
+                owner: 'James',
+                documentPath: 'asset/doc/ti1.pdf',
+                imagePath: 'asset/image/p1.jpg'
+            },
+            {
+                ID: 'p2',
+                name: '12Condo',
+                signature: '4xes',
+                owner: 'Tomson',
+                documentPath: 'asset/doc/ti2.pdf',
+                imagePath: 'asset/image/p2.jpg'
+            },
+            {
+                ID: 'p3',
+                name: 'U Mansion',
+                signature: 'man123',
+                owner: 'Jack',
+                documentPath: 'asset/doc/ti3.pdf',
+                imagePath: 'asset/image/p3.jpg'
+            },
+            {
+                ID: 'p4',
+                name: 'Oha Island',
+                signature: 'is1s23',
+                owner: 'Tony',
+                documentPath: 'asset/doc/ti4.pdf',
+                imagePath: 'asset/image/p4.jpg'
+            },
+            {
+                ID: 'p5',
+                name: 'MUIC',
+                signature: 'iccsMuic',
+                owner: 'Anakin',
+                documentPath: 'asset/doc/ti5.pdf',
+                imagePath: 'asset/image/p5.jpg'
+            },
+            {
+                ID: 'p6',
+                name: 'Sky Corridor',
+                signature: 'skmqu',
+                owner: 'Uko',
+                documentPath: 'asset/doc/ti6.pdf',
+                imagePath: 'asset/image/p6.jpg'
+            }
 
-        // ];
+        ];
 
-        // for (const property of properties){
-        //     await this.createProperty(ctx,property.ID,property.name,property.signature,property.owner,property.documentPath,property.imagePath);
-        // }
+        for (const property of properties) {
+            await this.createProperty(ctx, property.ID, property.name, property.signature, property.owner, property.documentPath, property.imagePath);
+        }
         console.info('============= END : Initialize Ledger ===========');
     }
 
