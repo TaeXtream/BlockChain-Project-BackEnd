@@ -14,5 +14,5 @@ popd
 
 # clean out any old identites in the wallets
 rm -rf ../wallet/*
-rm -rf javaApp/wallet/*
+rm -rf ../../javaApp/wallet/*
 

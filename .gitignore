@@ -35,3 +35,5 @@ build/
 /propertyListingCC/javaApp/src/
 /propertyListingCC/javaApp/src/main/java/
 /.SampleApp.java
+/fabric-samples/
+/javaApp/
